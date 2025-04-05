@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: purple;
+}
+li {
+  list-style-type: none;
+  padding: 10px;
+}
+
+li:hover {
+  width: 50%;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darkviolet;
+}
