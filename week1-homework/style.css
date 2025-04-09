@@ -1,0 +1,28 @@
+header {
+  width: 100%;
+  max-width: 100%; /* 부모 요소와 동일한 최대 너비 설정 */
+  left: 50%; /* 화면 중앙으로 이동 */
+  transform: translateX(-50%); /* 중앙 정렬 */
+  height: 40px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  padding: 0 40px;
+}
+
+.menu {
+  width: 30px;
+  height: 30px;
+  padding: 0 40px;
+}
