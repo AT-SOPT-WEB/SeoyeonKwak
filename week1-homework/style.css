@@ -32,34 +32,42 @@ header {
   z-index: 1000;
 }
 
+/* 사이드바 스타일 */
 .sidebar {
   position: fixed;
-  top: 80;
-  left: 0;
-  width: 200px;
-  height: 200px;
-  background-color: #f8f9fa;
-  padding: 40px 40px;
-  font-size: 20px;
-  font-weight: bold;
+  top: 100px;
+  left: 20px;
+  background-color: #f8f9fa; /* 배경색 */
+  padding: 1rem;
+  width: 11rem;
+  height: 14rem;
+  border-radius: 12px; /* 전체 사이드바의 모서리를 둥글게 */
+  display: flex;
+  flex-direction: column;
+  z-index: 100; /* 다른 요소 위에 표시 */
+  font-size: 18px;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+/* 각 링크의 border-radius 설정 */
+.sidebar a:nth-child(1) {
+  border-radius: 12px 12px 0px 0px; /* 첫 번째 링크 모서리 둥글게 */
+  padding: 10px 20px;
 }
 
-.sidebar li {
-  margin-bottom: 20px;
+.sidebar a:nth-child(2) {
+  border-radius: 0px; /* 중간 링크는 둥글게 하지 않음 */
+  padding: 10px 20px;
 }
 
-.sidebar a {
-  text-decoration: none;
-  color: #333;
+.sidebar a:nth-child(3) {
+  border-radius: 0px 0px 12px 12px; /* 마지막 링크 모서리 둥글게 */
+  padding: 10px 20px;
 }
 
+/* Hover 효과 */
 .sidebar a:hover {
-  text-decoration: underline;
+  background-color: gray; /* Hover 시 배경색 변경 */
+  color: white; /* Hover 시 텍스트 색상 변경 */
 }
 
 .logo {
