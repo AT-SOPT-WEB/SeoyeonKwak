@@ -9,17 +9,17 @@
 
 body {
   position: relative;
-  padding-top: 80px; /* 헤더 높이만큼 패딩 추가 */
-  height: 100vh; /* 전체 화면 높이 설정 */
+  padding-top: 80px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 header {
   width: 100%;
-  max-width: 100%; /* 부모 요소와 동일한 최대 너비 설정 */
-  left: 50%; /* 화면 중앙으로 이동 */
-  transform: translateX(-50%); /* 중앙 정렬 */
+  max-width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
   height: 40px;
   background-color: #f8f9fa;
   display: flex;
@@ -32,42 +32,39 @@ header {
   z-index: 1000;
 }
 
-/* 사이드바 스타일 */
 .sidebar {
   position: fixed;
   top: 100px;
   left: 20px;
-  background-color: #f8f9fa; /* 배경색 */
+  background-color: #f8f9fa;
   padding: 1rem;
   width: 11rem;
   height: 14rem;
-  border-radius: 12px; /* 전체 사이드바의 모서리를 둥글게 */
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  z-index: 100; /* 다른 요소 위에 표시 */
+  z-index: 100;
   font-size: 18px;
 }
 
-/* 각 링크의 border-radius 설정 */
 .sidebar a:nth-child(1) {
-  border-radius: 12px 12px 0px 0px; /* 첫 번째 링크 모서리 둥글게 */
+  border-radius: 12px 12px 0px 0px;
   padding: 10px 20px;
 }
 
 .sidebar a:nth-child(2) {
-  border-radius: 0px; /* 중간 링크는 둥글게 하지 않음 */
+  border-radius: 0px;
   padding: 10px 20px;
 }
 
 .sidebar a:nth-child(3) {
-  border-radius: 0px 0px 12px 12px; /* 마지막 링크 모서리 둥글게 */
+  border-radius: 0px 0px 12px 12px;
   padding: 10px 20px;
 }
 
-/* Hover 효과 */
 .sidebar a:hover {
-  background-color: gray; /* Hover 시 배경색 변경 */
-  color: white; /* Hover 시 텍스트 색상 변경 */
+  background-color: gray;
+  color: white;
 }
 
 .logo {
@@ -82,55 +79,54 @@ header {
   padding: 0 40px;
 }
 
-/* home-container 스타일 */
 .home-container {
-  width: 1200px; /* 컨테이너 너비 */
-  margin: 0 auto; /* 화면 중앙 정렬 */
+  width: 1200px;
+  margin: 0 auto;
 }
-/* grid 스타일 */
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개의 균등한 열 */
+  grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 150px;
-  gap: 10px; /* 아이템 간격 */
+  gap: 10px;
   margin-top: 20px;
 }
 
-/* 아이템 위치 설정 */
 .item-1 {
-  grid-column: 1 / 3; /* 첫 번째 열만 차지 */
-  grid-row: 1 / 2; /* 첫 번째 행만 차지 */
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
 }
 
 .item-2 {
-  grid-column: 3 / 5; /* 두 번째 열부터 네 번째 열까지 차지 */
-  grid-row: 1 / 3; /* 첫 번째 행만 차지 */
+  grid-column: 3 / 5;
+  grid-row: 1 / 3;
 }
 
 .item-3 {
-  grid-column: 1 / 3; /* 첫 번째 열만 차지 */
-  grid-row: 2/ 3; /* 두 번째 행만 차지 */
+  grid-column: 1 / 3;
+  grid-row: 2/ 3;
 }
 
 .item-4 {
-  grid-column: 1 / 4; /* 두 번째 열부터 세 번째 열까지 차지 */
-  grid-row: 3 / 4; /* 두 번째 행만 차지 */
+  grid-column: 1 / 4;
+  grid-row: 3 / 4;
 }
 
 .item-5 {
-  grid-column: 4 / 5; /* 네 번째 열만 차지 */
-  grid-row: 3/ 4; /* 두 번째 행만 차지 */
+  grid-column: 4 / 5;
+  grid-row: 3/ 4;
 }
 
 .grid img {
-  width: min(100%, 100%); /* 부모 요소에 맞게 이미지 크기 조정 */
+  width: min(100%, 100%);
   height: auto;
-  object-fit: fit-cover; /* 이미지 비율 유지 */
+  object-fit: fit-cover;
   border-radius: 10px;
 }
 
 .entire-section {
   width: 1200px;
+  margin: 40px 0;
 }
 
 .grid-2 {
@@ -176,30 +172,10 @@ header {
   }
 }
 
-/* 카드 스타일 */
 .card {
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #fff;
-}
-
-.card img {
-  width: 100%;
-}
-
-.card-content {
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.like-button {
-  background-color: #ddd; /* Temporary background color */
-  border: 1px solid #ccc; /* Optional border */
-}
-
-.like-button.active {
-  background-color: red; /* Temporary background color */
 }
 
 .item img {
@@ -217,28 +193,25 @@ header {
   transform: scale(1.1);
   transition: transform 0.3s ease;
 }
-/* 무한 배너 섹션 */
+
 .infinite-banner-section {
   width: 1200px;
   height: 150px;
-  margin: 80px 0; /* 여백 추가 (선택 사항) */
+  margin: 80px 0;
 }
 
-/* 배너 컨테이너 */
 .infinite-banner {
   overflow: hidden;
   position: relative;
   height: 100%;
 }
 
-/* 트랙 스타일 */
 .banner-track {
   display: flex;
   height: 100%;
   animation: scrollBanner 20s linear infinite;
 }
 
-/* 아이템 스타일 */
 .banner-track .item {
   flex: 0 0 auto;
   width: 200px;
@@ -246,7 +219,6 @@ header {
   margin-right: 10px;
 }
 
-/* 이미지 스타일 */
 .banner-track .item img {
   width: 100%;
   height: 100%;
@@ -258,7 +230,7 @@ header {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%); /* 트랙 전체 너비만큼 이동 */
+    transform: translateX(-100%);
   }
 }
 
@@ -288,4 +260,19 @@ footer {
 
 .footer-links a:hover {
   text-decoration: underline;
+}
+.heart {
+  width: 18px;
+  height: 18px;
+  background-image: url("assets/ic-empty-heart.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-top: 10px;
+}
+
+.heart:hover {
+  background-image: url("assets/ic-fill-heart.png");
+  transform: scale(1.2);
 }
