@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>블로그</title>
+  </head>
+  <body>
+    <header>
+      <img src="assets/ic-logo.svg" alt="로고" class="logo" />
+      <h3>Dev Blog</h3>
+      <img src="assets/ic-menu.svg" alt="메뉴 아이콘" class="menu" />
+    </header>
+
+    <nav class="sidebar">
+      <a href="#entire-section">전체</a>
+      <a href="#daily-section">일상</a>
+      <a href="#dev-section">개발</a>
+    </nav>
+
+    <section class="home-container">
+      <div class="grid">
+        <div class="item item-1">
+          <img src="assets/grid-1.jpg" alt="그리드 1" />
+        </div>
+        <div class="item item-2">
+          <img src="assets/grid-2.jpg" alt="그리드 2" />
+        </div>
+        <div class="item item-3">
+          <img src="assets/grid-3.jpg" alt="그리드 3" />
+        </div>
+        <div class="item item-4">
+          <img src="assets/grid-4.jpg" alt="그리드 4" />
+        </div>
+        <div class="item item-5">
+          <img src="assets/grid-5.jpg" alt="그리드 5" />
+        </div>
+      </div>
+    </section>
+    <section id="entire-section" class="entire-section">
+      <h1>전체</h1>
+      <div class="grid-3">
+        <div class="item item-6 card">
+          <img src="assets/grid-6.jpg" alt="그리드 6" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-7 card">
+          <img src="assets/grid-7.jpg" alt="그리드 7" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-8 card">
+          <img src="assets/grid-8.jpg" alt="그리드 8" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-9 card">
+          <img src="assets/grid-9.jpg" alt="그리드 9" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-10 card">
+          <img src="assets/grid-10.jpg" alt="그리드 10" />
+          <div class="heart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dev-section" class="entire-section">
+      <h1>개발</h1>
+      <div class="grid-3">
+        <div class="item item-6 card">
+          <img src="assets/grid-6.jpg" alt="그리드 6" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-7 card">
+          <img src="assets/grid-7.jpg" alt="그리드 7" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-8 card">
+          <img src="assets/grid-8.jpg" alt="그리드 8" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-9 card">
+          <img src="assets/grid-9.jpg" alt="그리드 9" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-10 card">
+          <img src="assets/grid-10.jpg" alt="그리드 10" />
+          <div class="heart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="daily-section" class="entire-section">
+      <h1>일상</h1>
+      <div class="grid-3">
+        <div class="item item-6 card">
+          <img src="assets/grid-6.jpg" alt="그리드 6" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-7 card">
+          <img src="assets/grid-7.jpg" alt="그리드 7" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-8 card">
+          <img src="assets/grid-8.jpg" alt="그리드 8" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-9 card">
+          <img src="assets/grid-9.jpg" alt="그리드 9" />
+          <div class="heart"></div>
+        </div>
+        <div class="item item-10 card">
+          <img src="assets/grid-10.jpg" alt="그리드 10" />
+          <div class="heart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="infinite-banner-section">
+      <h1>무한 배너</h1>
+      <div class="infinite-banner">
+        <div class="banner-track">
+          <!-- 원본 아이템 -->
+          <div class="item"><img src="assets/grid-6.jpg" alt="그리드 6" /></div>
+          <div class="item"><img src="assets/grid-7.jpg" alt="그리드 7" /></div>
+          <div class="item"><img src="assets/grid-8.jpg" alt="그리드 8" /></div>
+          <div class="item"><img src="assets/grid-9.jpg" alt="그리드 9" /></div>
+          <div class="item">
+            <img src="assets/grid-10.jpg" alt="그리드 10" />
+          </div>
+
+          <!-- 복제된 아이템 (원본과 동일한 순서) -->
+          <div class="item">
+            <img src="assets/grid-6.jpg" alt="그리드 6 복제본" />
+          </div>
+          <div class="item">
+            <img src="assets/grid-7.jpg" alt="그리드 7 복제본" />
+          </div>
+          <div class="item">
+            <img src="assets/grid-8.jpg" alt="그리드 8 복제본" />
+          </div>
+          <div class="item">
+            <img src="assets/grid-9.jpg" alt="그리드 9 복제본" />
+          </div>
+          <div class="item">
+            <img src="assets/grid-10.jpg" alt="그리드 10 복제본" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <p>&copy; 2025 Dev Blog. All rights reserved.</p>
+        <nav class="footer-links">
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">문의하기</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
