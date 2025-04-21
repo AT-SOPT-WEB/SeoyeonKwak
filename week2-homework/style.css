@@ -1,0 +1,55 @@
+body {
+  font-family: "Noto Sans KR", Arial, sans-serif;
+  margin: 0;
+  padding: 30px;
+}
+
+table {
+  width: 600px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 14px 10px;
+  text-align: center;
+}
+
+th {
+  background: #4f8cff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+tr:nth-child(even) {
+  background: #f0f4ff;
+}
+
+tr:hover {
+  background: #e6f0ff;
+}
+
+td {
+  font-size: 1em;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #4f8cff;
+}
+
+td:nth-child(2) {
+  font-weight: bold;
+  color: #4f8cff;
+}
+
+td:nth-child(3) {
+  font-size: 0.98em;
+  color: #888;
+}
