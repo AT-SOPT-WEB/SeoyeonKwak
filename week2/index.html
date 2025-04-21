@@ -1,0 +1,26 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="add-button">추가</button>
+    <ul id="ul"></ul>
+  </body>
+
+  <script>
+    document.getElementById("add-button").addEventListener("click", () => {
+      const ul = document.getElementById("ul");
+
+      for (let i = 1; i <= 3000; i++) {
+        const li = document.createElement("li");
+        li.innerText = `${i}`;
+        ul.appendChild(li);
+      }
+    });
+  </script>
+</html>
