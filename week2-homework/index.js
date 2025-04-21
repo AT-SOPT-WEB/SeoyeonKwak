@@ -6,7 +6,7 @@ fetch("data.json")
   });
 
 function renderTable(todos) {
-  const tbody = document.querySelector("#todo-table");
+  const tbody = document.querySelector("#todo-table tbody");
   tbody.innerHTML = "";
 
   todos.forEach((todo) => {
