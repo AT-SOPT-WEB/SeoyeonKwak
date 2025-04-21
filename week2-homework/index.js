@@ -5,11 +5,18 @@ fetch("data.json")
     renderTable(data);
   });
 
-function renderTable(todos) {
-  const tbody = document.querySelector("#todo-table tbody");
+function renderTable(todos, filter = "all") {
+  const tbody = document.getElementById("todo-list");
   tbody.innerHTML = "";
 
-  todos.forEach((todo) => {
+  let filtered = todos;
+  if (filter === "completed") {
+    filtered = todos.filter((todo) => todo.completed);
+  } else if (filter === "incomplete") {
+    filtered = todos.filter((todo) => !todo.completed);
+  }
+
+  filtered.forEach((todo) => {
     const tr = document.createElement("tr");
 
     const tdCheck = document.createElement("td");
@@ -36,3 +43,20 @@ function renderTable(todos) {
     tbody.appendChild(tr);
   });
 }
+
+function getTodos() {
+  return JSON.parse(localStorage.getItem("todos")) || [];
+}
+
+// 필터 버튼 이벤트
+document.addEventListener("DOMContentLoaded", () => {
+  const btns = document.querySelectorAll(".filter-btn");
+  btns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      btns.forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+      const filter = this.getAttribute("data-filter");
+      renderTable(getTodos(), filter);
+    });
+  });
+});
