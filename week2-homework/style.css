@@ -103,3 +103,40 @@ td:nth-child(3) {
   cursor: pointer;
   outline: none;
 }
+
+.add-todo-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  gap: 10px;
+}
+
+.add-todo-form input,
+.add-todo-form select,
+.add-todo-form button {
+  padding: 8px 12px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 2px solid #4f8cff;
+  outline: none;
+}
+
+.add-todo-form input,
+.add-todo-form select {
+  background: #f0f4ff;
+  color: #333;
+  width: 180px;
+}
+
+.add-todo-form button {
+  background-color: #4f8cff;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-todo-form button:hover {
+  background-color: #3a72d1;
+}
