@@ -11,6 +11,15 @@
         <button data-filter="all" class="filter-btn active">전체</button>
         <button data-filter="completed" class="filter-btn">완료됨</button>
         <button data-filter="incomplete" class="filter-btn">미완료</button>
+        <div class="priority-filter">
+          <label for="priority-select">중요도:</label>
+          <select id="priority-select">
+            <option value="all">전체</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
       </div>
     <table id="todo-table">
       <thead>

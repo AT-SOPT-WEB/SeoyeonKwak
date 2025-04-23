@@ -5,7 +5,7 @@ fetch("data.json")
     renderTable(data);
   });
 
-function renderTable(todos, filter = "all") {
+function renderTable(todos, filter = "all", priorityFilter = "all") {
   const tbody = document.getElementById("todo-list");
   tbody.innerHTML = "";
 
@@ -14,6 +14,12 @@ function renderTable(todos, filter = "all") {
     filtered = todos.filter((todo) => todo.completed);
   } else if (filter === "incomplete") {
     filtered = todos.filter((todo) => !todo.completed);
+  }
+
+  if (priorityFilter !== "all") {
+    filtered = filtered.filter(
+      (todo) => String(todo.priority) === priorityFilter
+    );
   }
 
   filtered.forEach((todo) => {
@@ -48,15 +54,24 @@ function getTodos() {
   return JSON.parse(localStorage.getItem("todos")) || [];
 }
 
-// 필터 버튼 이벤트
 document.addEventListener("DOMContentLoaded", () => {
   const btns = document.querySelectorAll(".filter-btn");
+  const prioritySelect = document.getElementById("priority-select");
+
+  function applyFilters() {
+    const status =
+      document.querySelector(".filter-btn.active")?.dataset.filter || "all";
+    const priority = prioritySelect.value;
+    renderTable(getTodos(), status, priority);
+  }
+
   btns.forEach((btn) => {
     btn.addEventListener("click", function () {
       btns.forEach((b) => b.classList.remove("active"));
       this.classList.add("active");
-      const filter = this.getAttribute("data-filter");
-      renderTable(getTodos(), filter);
+      applyFilters();
     });
   });
+
+  prioritySelect.addEventListener("change", applyFilters);
 });
