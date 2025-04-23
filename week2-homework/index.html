@@ -8,46 +8,49 @@
   </head>
   <body>
     <div id="filter-buttons" class="filter-buttons">
-        <button data-filter="all" class="filter-btn active">전체</button>
-        <button data-filter="completed" class="filter-btn">완료됨</button>
-        <button data-filter="incomplete" class="filter-btn">미완료</button>
-        <div class="priority-filter">
-          <label for="priority-select">중요도:</label>
-          <select id="priority-select">
-            <option value="all">전체</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="add-todo-form">
-        <input
-          type="text"
-          id="todo-input"
-          placeholder="할 일을 입력하세요"
-          maxlength="100"
-        />
-        <select id="priority-input">
-          <option value="">중요도 선택</option>
+      <button data-filter="all" class="filter-btn active">전체</button>
+      <button data-filter="completed" class="filter-btn">완료됨</button>
+      <button data-filter="incomplete" class="filter-btn">미완료</button>
+      <div class="priority-filter">
+        <label for="priority-select">중요도:</label>
+        <select id="priority-select">
+          <option value="all">전체</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
-        <button id="add-btn">추가</button>
       </div>
-      
+    </div>
+
+    <div class="add-todo-form">
+      <input
+        type="text"
+        id="todo-input"
+        placeholder="할 일을 입력하세요"
+        maxlength="100"
+      />
+      <select id="priority-input">
+        <option value="">중요도 선택</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <button id="add-btn">추가</button>
+    </div>
+
     <table id="todo-table">
       <thead>
         <tr>
-          <th>✅</th>
+          <th>
+            <input type="checkbox" id="select-all" />
+          </th>
           <th>중요도</th>
           <th>완료됨</th>
           <th>할 일</th>
         </tr>
       </thead>
       <tbody id="todo-list"></tbody>
+    </table>
     <script type="module" src="index.js"></script>
   </body>
 </html>

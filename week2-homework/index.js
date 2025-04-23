@@ -1,7 +1,13 @@
+// --- 유틸 함수: todos 가져오기 ---
 function getTodos() {
   return JSON.parse(localStorage.getItem("todos")) || [];
 }
 
+function setTodos(todos) {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+// --- 테이블 렌더링 ---
 function renderTable(todos, filter = "all", priorityFilter = "all") {
   const tbody = document.getElementById("todo-list");
   tbody.innerHTML = "";
@@ -30,7 +36,7 @@ function renderTable(todos, filter = "all", priorityFilter = "all") {
     checkbox.addEventListener("change", () => {
       const todos = getTodos();
       todos[index].completed = checkbox.checked;
-      localStorage.setItem("todos", JSON.stringify(todos));
+      setTodos(todos);
       applyFilters(); // 체크박스 바뀌면 다시 필터 적용
     });
 
@@ -52,8 +58,21 @@ function renderTable(todos, filter = "all", priorityFilter = "all") {
 
     tbody.appendChild(tr);
   });
+
+  // 전체 체크박스 기능
+  const selectAll = document.getElementById("select-all");
+  selectAll.checked = filtered.every((todo) => todo.completed);
+  selectAll.addEventListener("change", (e) => {
+    const todos = getTodos();
+    filtered.forEach((todo, index) => {
+      todos[index].completed = e.target.checked;
+    });
+    setTodos(todos);
+    applyFilters();
+  });
 }
 
+// --- 필터 적용 함수 ---
 function applyFilters() {
   const status =
     document.querySelector(".filter-btn.active")?.dataset.filter || "all";
@@ -61,7 +80,51 @@ function applyFilters() {
   renderTable(getTodos(), status, priority);
 }
 
-// 초기화
+// --- 드래그 앤 드롭으로 순서 변경 ---
+document.addEventListener("DOMContentLoaded", () => {
+  const tbody = document.getElementById("todo-list");
+
+  // Drag & Drop
+  tbody.addEventListener("dragstart", (event) => {
+    event.target.classList.add("dragging");
+  });
+
+  tbody.addEventListener("dragend", (event) => {
+    event.target.classList.remove("dragging");
+    const todos = getTodos();
+    const rows = Array.from(tbody.children);
+    const newTodos = rows.map(
+      (row, index) => todos[parseInt(row.dataset.index)]
+    );
+    setTodos(newTodos); // 순서 변경된 todos를 저장
+  });
+
+  tbody.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    const dragging = document.querySelector(".dragging");
+    const rows = Array.from(tbody.children);
+    const closestRow = rows.reduce(
+      (closest, row) => {
+        const box = row.getBoundingClientRect();
+        const offset = event.clientY - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset, row };
+        } else {
+          return closest;
+        }
+      },
+      { offset: Number.NEGATIVE_INFINITY }
+    ).row;
+
+    if (closestRow) {
+      tbody.insertBefore(dragging, closestRow);
+    } else {
+      tbody.appendChild(dragging);
+    }
+  });
+});
+
+// --- 초기화 ---
 document.addEventListener("DOMContentLoaded", () => {
   const btns = document.querySelectorAll(".filter-btn");
   const prioritySelect = document.getElementById("priority-select");
@@ -83,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("data.json")
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem("todos", JSON.stringify(data));
+        setTodos(data);
         applyFilters();
       });
   } else {
@@ -113,7 +176,7 @@ addBtn.addEventListener("click", () => {
 
   const todos = getTodos();
   todos.push(newTodo);
-  localStorage.setItem("todos", JSON.stringify(todos));
+  setTodos(todos);
 
   // 입력값 초기화
   todoInput.value = "";
