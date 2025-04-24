@@ -25,8 +25,9 @@ function renderTable(todos, filter = "all", priorityFilter = "all") {
     );
   }
 
-  filtered.forEach((todo, index) => {
+  filtered.forEach((todo) => {
     const tr = document.createElement("tr");
+    tr.dataset.index = todos.indexOf(todo); // ✅ 원본 todos의 인덱스를 저장
 
     const tdCheck = document.createElement("td");
     const checkbox = document.createElement("input");
@@ -35,9 +36,9 @@ function renderTable(todos, filter = "all", priorityFilter = "all") {
 
     checkbox.addEventListener("change", () => {
       const todos = getTodos();
-      todos[index].completed = checkbox.checked;
+      todos[todos.indexOf(todo)].completed = checkbox.checked;
       setTodos(todos);
-      applyFilters(); // 체크박스 바뀌면 다시 필터 적용
+      applyFilters();
     });
 
     tdCheck.appendChild(checkbox);
@@ -59,14 +60,20 @@ function renderTable(todos, filter = "all", priorityFilter = "all") {
     tbody.appendChild(tr);
   });
 
-  // 전체 체크박스 기능
+  // ✅ 전체 선택 체크박스 기능
   const selectAll = document.getElementById("select-all");
-  selectAll.checked = filtered.every((todo) => todo.completed);
+  selectAll.checked =
+    filtered.length > 0 && filtered.every((todo) => todo.completed);
+
   selectAll.addEventListener("change", (e) => {
     const todos = getTodos();
-    filtered.forEach((todo, index) => {
-      todos[index].completed = e.target.checked;
+    const checked = e.target.checked;
+
+    filtered.forEach((todo) => {
+      const index = todos.indexOf(todo);
+      todos[index].completed = checked;
     });
+
     setTodos(todos);
     applyFilters();
   });
@@ -79,50 +86,6 @@ function applyFilters() {
   const priority = document.getElementById("priority-select").value;
   renderTable(getTodos(), status, priority);
 }
-
-// --- 드래그 앤 드롭으로 순서 변경 ---
-document.addEventListener("DOMContentLoaded", () => {
-  const tbody = document.getElementById("todo-list");
-
-  // Drag & Drop
-  tbody.addEventListener("dragstart", (event) => {
-    event.target.classList.add("dragging");
-  });
-
-  tbody.addEventListener("dragend", (event) => {
-    event.target.classList.remove("dragging");
-    const todos = getTodos();
-    const rows = Array.from(tbody.children);
-    const newTodos = rows.map(
-      (row, index) => todos[parseInt(row.dataset.index)]
-    );
-    setTodos(newTodos); // 순서 변경된 todos를 저장
-  });
-
-  tbody.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    const dragging = document.querySelector(".dragging");
-    const rows = Array.from(tbody.children);
-    const closestRow = rows.reduce(
-      (closest, row) => {
-        const box = row.getBoundingClientRect();
-        const offset = event.clientY - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-          return { offset, row };
-        } else {
-          return closest;
-        }
-      },
-      { offset: Number.NEGATIVE_INFINITY }
-    ).row;
-
-    if (closestRow) {
-      tbody.insertBefore(dragging, closestRow);
-    } else {
-      tbody.appendChild(dragging);
-    }
-  });
-});
 
 // --- 초기화 ---
 document.addEventListener("DOMContentLoaded", () => {
@@ -184,4 +147,67 @@ addBtn.addEventListener("click", () => {
   priorityInput.value = "";
 
   applyFilters(); // 현재 필터 상태로 다시 렌더링
+});
+
+const deleteBtn = document.getElementById("delete-btn");
+
+deleteBtn.addEventListener("click", () => {
+  const checkboxes = document.querySelectorAll(
+    "#todo-list input[type='checkbox']"
+  );
+  const todos = getTodos();
+
+  const updatedTodos = [];
+  checkboxes.forEach((checkbox, index) => {
+    if (!checkbox.checked) {
+      updatedTodos.push(todos[index]);
+    }
+  });
+
+  setTodos(updatedTodos);
+  applyFilters();
+});
+
+const completeBtn = document.getElementById("complete-btn");
+
+completeBtn.addEventListener("click", () => {
+  const checkboxes = document.querySelectorAll(
+    "#todo-list input[type='checkbox']"
+  );
+  const todos = getTodos();
+
+  let hasAlreadyCompleted = false;
+
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      const tr = checkbox.closest("tr");
+      const index = parseInt(tr.dataset.index);
+      if (todos[index].completed) {
+        hasAlreadyCompleted = true;
+      }
+    }
+  });
+
+  if (hasAlreadyCompleted) {
+    const modal = document.getElementById("complete-warning-modal");
+    modal.classList.remove("hidden");
+    return;
+  }
+
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      const tr = checkbox.closest("tr");
+      const index = parseInt(tr.dataset.index);
+      todos[index].completed = true;
+    }
+  });
+
+  setTodos(todos);
+  applyFilters();
+});
+
+const closeModalBtn = document.getElementById("close-modal-btn");
+closeModalBtn.addEventListener("click", () => {
+  const modal = document.getElementById("complete-warning-modal");
+  modal.classList.add("hidden");
 });

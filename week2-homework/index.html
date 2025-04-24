@@ -38,6 +38,11 @@
       <button id="add-btn">추가</button>
     </div>
 
+    <div class="action-buttons">
+      <button id="complete-btn">완료</button>
+      <button id="delete-btn">삭제</button>
+    </div>
+
     <table id="todo-table">
       <thead>
         <tr>
@@ -51,6 +56,13 @@
       </thead>
       <tbody id="todo-list"></tbody>
     </table>
+
+    <div id="complete-warning-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>선택한 항목 중 이미 완료된 투두가 있습니다.</p>
+        <button id="close-modal-btn">닫기</button>
+      </div>
+    </div>
     <script type="module" src="index.js"></script>
   </body>
 </html>
