@@ -13,7 +13,7 @@
       <button data-filter="incomplete" class="filter-btn">미완료</button>
       <div class="priority-filter">
         <select id="priority-select">
-          <option value="all">전체</option>
+          <option value="all">중요도</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -37,11 +37,6 @@
       <button id="add-btn">추가</button>
     </div>
 
-    <div class="action-buttons">
-      <button id="complete-btn">완료</button>
-      <button id="delete-btn">삭제</button>
-    </div>
-
     <table id="todo-table">
       <thead>
         <tr>
@@ -55,6 +50,11 @@
       </thead>
       <tbody id="todo-list"></tbody>
     </table>
+
+    <div class="action-buttons">
+      <button id="complete-btn">완료</button>
+      <button id="delete-btn">삭제</button>
+    </div>
 
     <div id="complete-warning-modal" class="modal hidden">
       <div class="modal-content">
