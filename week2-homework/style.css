@@ -122,11 +122,14 @@ td:nth-child(3) {
   outline: none;
 }
 
-.add-todo-form input,
 .add-todo-form select {
-  background: #f0f4ff;
-  color: #333;
   width: 180px;
+  padding: 10px 10px;
+}
+
+.add-todo-form input {
+  width: 300px;
+  padding: 10px 10px;
 }
 
 .add-todo-form button {
@@ -134,7 +137,6 @@ td:nth-child(3) {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .add-todo-form button:hover {

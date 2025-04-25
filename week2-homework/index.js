@@ -1,4 +1,3 @@
-// --- 유틸 함수: todos 가져오기 ---
 function getTodos() {
   return JSON.parse(localStorage.getItem("todos")) || [];
 }
@@ -7,7 +6,6 @@ function setTodos(todos) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-// --- 테이블 렌더링 ---
 function renderTable(todos, filter = "all", priorityFilter = "all") {
   const tbody = document.getElementById("todo-list");
   tbody.innerHTML = "";
@@ -27,18 +25,21 @@ function renderTable(todos, filter = "all", priorityFilter = "all") {
 
   filtered.forEach((todo) => {
     const tr = document.createElement("tr");
-    tr.dataset.index = todos.indexOf(todo); // ✅ 원본 todos의 인덱스를 저장
+    tr.dataset.index = todos.indexOf(todo); // 원본 todos의 인덱스를 저장
 
     const tdCheck = document.createElement("td");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.checked = todo.completed;
+    checkbox.checked = false; // 항상 초기에는 선택되지 않도록
 
     checkbox.addEventListener("change", () => {
-      const todos = getTodos();
-      todos[todos.indexOf(todo)].completed = checkbox.checked;
-      setTodos(todos);
-      applyFilters();
+      // 하나라도 체크 해제되면 전체 선택도 해제
+      const selectAll = document.getElementById("select-all");
+      const checkboxes = document.querySelectorAll(
+        "#todo-list input[type='checkbox']"
+      );
+      const allChecked = [...checkboxes].every((cb) => cb.checked);
+      selectAll.checked = allChecked;
     });
 
     tdCheck.appendChild(checkbox);
@@ -60,26 +61,25 @@ function renderTable(todos, filter = "all", priorityFilter = "all") {
     tbody.appendChild(tr);
   });
 
-  // ✅ 전체 선택 체크박스 기능
+  // 전체 선택 체크박스 기능
   const selectAll = document.getElementById("select-all");
   selectAll.checked =
-    filtered.length > 0 && filtered.every((todo) => todo.completed);
+    filtered.length > 0 &&
+    [...tbody.querySelectorAll("input[type='checkbox']")].every(
+      (checkbox) => checkbox.checked
+    );
 
   selectAll.addEventListener("change", (e) => {
-    const todos = getTodos();
     const checked = e.target.checked;
 
-    filtered.forEach((todo) => {
-      const index = todos.indexOf(todo);
-      todos[index].completed = checked;
+    // tbody 내 모든 체크박스에 대해 상태 설정
+    tbody.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
+      checkbox.checked = checked;
     });
-
-    setTodos(todos);
-    applyFilters();
   });
 }
 
-// --- 필터 적용 함수 ---
+// 필터링 구현 부분
 function applyFilters() {
   const status =
     document.querySelector(".filter-btn.active")?.dataset.filter || "all";
@@ -87,7 +87,7 @@ function applyFilters() {
   renderTable(getTodos(), status, priority);
 }
 
-// --- 초기화 ---
+// 초기화
 document.addEventListener("DOMContentLoaded", () => {
   const btns = document.querySelectorAll(".filter-btn");
   const prioritySelect = document.getElementById("priority-select");
@@ -141,7 +141,6 @@ addBtn.addEventListener("click", () => {
   todos.push(newTodo);
   setTodos(todos);
 
-  // 입력값 초기화
   todoInput.value = "";
   todoInput.placeholder = "할 일을 입력하세요";
   priorityInput.value = "";
