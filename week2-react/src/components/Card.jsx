@@ -1,5 +1,3 @@
-// Card.jsx
-
 import style from "./Card.module.css";
 
 const Card = ({ name, github, englishName }) => {
