@@ -1,4 +1,12 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
+import {
+  buttonStyle,
+  inputStyle,
+  inputWrapperStyle,
+} from "../../styles/inputStyles";
+import GithubProfileCard from "../github/GithubProfileCard";
+import closeIcon from "../../assets/ic-close.svg";
 
 function GithubSearchContainer() {
   const [searchInput, setSearchInput] = useState("");
@@ -39,12 +47,6 @@ function GithubSearchContainer() {
     setUserInfo({ status: "idle", data: null });
   };
 
-  const handleGoToGithub = () => {
-    if (userInfo.data?.html_url) {
-      window.open(userInfo.data.html_url, "_blank");
-    }
-  };
-
   const handleDeleteSearch = (idToDelete) => {
     const updated = recentSearches.filter((id) => id !== idToDelete);
     setRecentSearches(updated);
@@ -63,14 +65,19 @@ function GithubSearchContainer() {
   return (
     <div>
       {/* ✅ 입력창 및 검색 버튼 */}
-      <input
-        type="text"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        onKeyPress={handleKeyPress}
-        placeholder="깃허브 아이디를 입력하세요"
-      />
-      <button onClick={handleSearch}>검색</button>
+      <div css={inputWrapperStyle}>
+        <input
+          type="text"
+          value={searchInput}
+          css={inputStyle}
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder="깃허브 아이디를 입력하세요"
+        />
+        <button css={buttonStyle} onClick={handleSearch}>
+          검색
+        </button>
+      </div>
 
       {/* ✅ 최근 검색어 목록 */}
       {recentSearches.length > 0 && (
@@ -97,7 +104,7 @@ function GithubSearchContainer() {
                     cursor: "pointer",
                   }}
                 >
-                  ❌
+                  <img src={closeIcon} alt="닫기" width="16" height="16" />
                 </button>
               </li>
             ))}
@@ -107,43 +114,7 @@ function GithubSearchContainer() {
 
       {/* ✅ 사용자 정보 */}
       {userInfo.status === "resolved" && (
-        <div style={{ position: "relative", marginTop: "16px" }}>
-          <button
-            onClick={handleClearUser}
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              background: "transparent",
-              border: "none",
-              fontSize: "18px",
-              cursor: "pointer",
-            }}
-          >
-            ❌
-          </button>
-
-          <div onClick={handleGoToGithub} style={{ cursor: "pointer" }}>
-            <img
-              src={userInfo.data.avatar_url}
-              alt="avatar"
-              width={100}
-              style={{ borderRadius: "50%" }}
-            />
-            <h2>{userInfo.data.name}</h2>
-          </div>
-
-          <p>깃허브 아이디: {userInfo.data.login}</p>
-          <p>자기소개: {userInfo.data.bio || "소개 없음"}</p>
-          <p>
-            깃허브 주소:{" "}
-            <a href={userInfo.data.html_url} target="_blank" rel="noreferrer">
-              {userInfo.data.html_url}
-            </a>
-          </p>
-          <p>팔로워: {userInfo.data.followers}</p>
-          <p>팔로잉: {userInfo.data.following}</p>
-        </div>
+        <GithubProfileCard userInfo={userInfo.data} onClear={handleClearUser} />
       )}
     </div>
   );
