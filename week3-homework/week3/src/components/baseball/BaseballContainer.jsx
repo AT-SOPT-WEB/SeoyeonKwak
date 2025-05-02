@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
-import Input from "../baseball/Input";
-import Message from "../baseball/Message";
-import HistoryList from "../baseball/HistoryList";
+import Input from "./Input";
+import Message from "./Message";
+import HistoryList from "./HistoryList";
 
 function generateRandomNumber() {
   const digits = [];

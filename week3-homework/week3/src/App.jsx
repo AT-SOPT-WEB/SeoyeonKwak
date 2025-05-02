@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { css } from "@emotion/react";
 import Header from "./components/Header";
-import GithubSearchContainer from "./components/container/GithubSearchContainer";
-import BaseballContainer from "./components/container/BaseballContainer";
+import GithubSearchContainer from "./components/github/GithubSearchContainer";
+import BaseballContainer from "./components/baseball/BaseballContainer";
 
 const rootWrapper = css`
   width: 100vw;

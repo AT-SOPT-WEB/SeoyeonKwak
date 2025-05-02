@@ -5,8 +5,8 @@ import {
   inputStyle,
   inputWrapperStyle,
 } from "../../styles/inputStyles";
-import GithubProfileCard from "../github/GithubProfileCard";
-import closeIcon from "../../assets/ic-close.svg";
+import GithubProfileCard from "./GithubProfileCard";
+import RecentSearchList from "./RecentSearchList";
 
 function GithubSearchContainer() {
   const [searchInput, setSearchInput] = useState("");
@@ -64,7 +64,7 @@ function GithubSearchContainer() {
 
   return (
     <div>
-      {/* ✅ 입력창 및 검색 버튼 */}
+      {/* 입력창 및 검색 버튼 */}
       <div css={inputWrapperStyle}>
         <input
           type="text"
@@ -79,40 +79,14 @@ function GithubSearchContainer() {
         </button>
       </div>
 
-      {/* ✅ 최근 검색어 목록 */}
-      {recentSearches.length > 0 && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>최근 검색어</h3>
-          <ul style={{ display: "flex", gap: "8px" }}>
-            {recentSearches.map((id) => (
-              <li
-                key={id}
-                style={{ display: "flex", alignItems: "center", gap: "4px" }}
-              >
-                <span
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
-                  onClick={() => getUserInfo(id)}
-                >
-                  {id}
-                </span>
-                <button
-                  onClick={() => handleDeleteSearch(id)}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    color: "red",
-                    cursor: "pointer",
-                  }}
-                >
-                  <img src={closeIcon} alt="닫기" width="16" height="16" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* 최근 검색어 목록 */}
+      <RecentSearchList
+        searches={recentSearches}
+        onSelect={getUserInfo}
+        onDelete={handleDeleteSearch}
+      />
 
-      {/* ✅ 사용자 정보 */}
+      {/* 사용자 정보 */}
       {userInfo.status === "resolved" && (
         <GithubProfileCard userInfo={userInfo.data} onClear={handleClearUser} />
       )}
