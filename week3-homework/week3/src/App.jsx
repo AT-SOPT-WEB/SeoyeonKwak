@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from "react";
 import { css } from "@emotion/react";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 import GithubSearchContainer from "./components/github/GithubSearchContainer";
 import BaseballContainer from "./components/baseball/BaseballContainer";
 
