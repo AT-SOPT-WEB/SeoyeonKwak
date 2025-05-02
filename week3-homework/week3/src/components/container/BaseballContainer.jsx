@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
+import { css } from "@emotion/react";
 import Input from "../baseball/Input";
 import Message from "../baseball/Message";
 import HistoryList from "../baseball/HistoryList";
@@ -11,6 +13,27 @@ function generateRandomNumber() {
   }
   return digits;
 }
+
+// 스타일 정의
+const containerStyle = css`
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 12px;
+`;
+
+const titleStyle = css`
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+`;
+
+const attemptStyle = css`
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #495057;
+`;
 
 function BaseballContainer() {
   const [answer, setAnswer] = useState([]);
@@ -77,9 +100,9 @@ function BaseballContainer() {
   };
 
   return (
-    <div>
-      <h2>⚾ 숫자 야구 게임</h2>
-      <p>시도 횟수: {attempt} / 10</p>
+    <div css={containerStyle}>
+      <h2 css={titleStyle}>⚾ 숫자 야구 게임</h2>
+      <p css={attemptStyle}>시도 횟수: {attempt} / 10</p>
       <Input input={input} setInput={setInput} onSubmit={handleSubmit} />
       <Message text={message} />
       <HistoryList history={history} />
