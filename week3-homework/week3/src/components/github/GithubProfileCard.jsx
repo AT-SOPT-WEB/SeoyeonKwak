@@ -7,11 +7,10 @@ const cardStyle = css`
   margin-top: 16px;
   padding: 20px;
   border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+  border: 2px solid #ccc;
 `;
 
 const closeButtonStyle = css`
