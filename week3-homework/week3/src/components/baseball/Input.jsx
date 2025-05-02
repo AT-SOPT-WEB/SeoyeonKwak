@@ -25,18 +25,20 @@ function Input({ input, setInput, onSubmit }) {
   };
 
   return (
-    <div css={inputWrapperStyle}>
-      <input
-        type="text"
-        value={input}
-        css={inputStyle}
-        onChange={handleChange}
-        onKeyPress={handleKeyPress}
-        placeholder="3자리 숫자 입력"
-      />
-      <button css={buttonStyle} onClick={onSubmit}>
-        확인
-      </button>
+    <div>
+      <div css={inputWrapperStyle}>
+        <input
+          type="text"
+          value={input}
+          css={inputStyle}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+          placeholder="3자리 숫자 입력"
+        />
+        <button css={buttonStyle} onClick={onSubmit}>
+          확인
+        </button>
+      </div>
       {warning && <p style={{ color: "red" }}>{warning}</p>}
     </div>
   );
