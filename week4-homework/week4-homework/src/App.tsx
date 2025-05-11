@@ -3,6 +3,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import MyPage from "./pages/MyPage";
 import Header from "./components/Header";
+import UserSearch from "./pages/UserSearch";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/users" element={<UserSearch />} />
       </Routes>
     </>
   );
