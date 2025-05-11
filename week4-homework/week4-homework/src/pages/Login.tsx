@@ -14,11 +14,9 @@ function Login() {
       const response = await signin({ loginId, password });
 
       if (response.success && response.data) {
-        // 로그인 성공: userId 저장 후 마이페이지로 이동
         localStorage.setItem("userId", String(response.data.userId));
         navigate("/mypage");
       } else {
-        // 로그인 실패: 에러 메시지 출력
         setError(response.message || "로그인에 실패했습니다.");
       }
     } catch (err) {
@@ -29,7 +27,7 @@ function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-sm p-6 bg-white rounded-lg ">
         <h1 className="text-2xl font-bold mb-6 text-center">로그인</h1>
 
         <input

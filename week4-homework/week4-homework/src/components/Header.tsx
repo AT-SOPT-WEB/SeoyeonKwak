@@ -26,7 +26,6 @@ export default function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("userId");
-    localStorage.removeItem("nickname");
     navigate("/login");
   };
 
@@ -39,7 +38,6 @@ export default function Header() {
     <header className="bg-white border-b border-gray-200 px-4 py-3 shadow-md flex items-center justify-between">
       <h1 className="text-xl font-bold text-blue-600">MyApp</h1>
 
-      {/* 데스크탑 메뉴 */}
       <nav className="hidden md:flex gap-6 items-center">
         <button onClick={() => goTo("/mypage")} className="hover:underline">
           내 정보
@@ -53,7 +51,6 @@ export default function Header() {
         <span className="text-sm text-gray-600">👤 {nickname}</span>
       </nav>
 
-      {/* 모바일 메뉴 아이콘 */}
       <button
         className="md:hidden text-gray-700"
         onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -61,13 +58,12 @@ export default function Header() {
         ☰
       </button>
 
-      {/* 모바일 드롭다운 메뉴 */}
       <div
         className={`${
           isMenuOpen ? "max-h-40 py-4" : "max-h-0 py-0"
         } absolute top-[60px] left-0 w-full bg-white overflow-hidden flex flex-col items-center border-b border-gray-200 shadow-md md:hidden transition-all duration-300 ease-in-out`}
       >
-        <button onClick={() => goTo("/me")} className="py-2">
+        <button onClick={() => goTo("/mypage")} className="py-2">
           내 정보
         </button>
         <button onClick={() => goTo("/users")} className="py-2">
