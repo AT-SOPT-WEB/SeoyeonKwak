@@ -57,7 +57,7 @@ function Signup() {
         });
 
         if (res.success) {
-          alert("회원가입이 완료되었습니다!");
+          alert(`${res.data.nickname}님, 회원가입이 완료되었습니다!`);
           navigate("/login");
         } else {
           alert(res.message || "회원가입에 실패했습니다.");
