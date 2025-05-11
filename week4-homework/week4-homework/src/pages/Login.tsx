@@ -1,7 +1,31 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signin } from "../api/api";
 
 function Login() {
   const navigate = useNavigate();
+
+  const [loginId, setLoginId] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await signin({ loginId, password });
+
+      if (response.success && response.data) {
+        // 로그인 성공: userId 저장 후 마이페이지로 이동
+        localStorage.setItem("userId", String(response.data.userId));
+        navigate("/mypage");
+      } else {
+        // 로그인 실패: 에러 메시지 출력
+        setError(response.message || "로그인에 실패했습니다.");
+      }
+    } catch (err) {
+      console.error("로그인 에러:", err);
+      setError("서버 요청 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -11,15 +35,25 @@ function Login() {
         <input
           type="text"
           placeholder="아이디"
+          value={loginId}
+          onChange={(e) => setLoginId(e.target.value)}
           className="w-full px-4 py-2 mb-4 border rounded-md"
         />
         <input
           type="password"
           placeholder="비밀번호"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className="w-full px-4 py-2 mb-4 border rounded-md"
         />
 
-        <button className="w-full bg-blue-500 text-white py-2 rounded-md mb-3">
+        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+
+        <button
+          onClick={handleLogin}
+          disabled={!loginId || !password}
+          className="w-full bg-blue-500 text-white py-2 rounded-md mb-3 disabled:opacity-50"
+        >
           로그인
         </button>
 

@@ -1,10 +1,10 @@
-import axios from "axios";
+import axiosInstance from "./axios";
 
 // 로그인
 export const signin = async (
   payload: SigninRequest
 ): Promise<SigninResponse> => {
-  const response = await axios.post<SigninResponse>(
+  const response = await axiosInstance.post<SigninResponse>(
     "/api/v1/auth/signin",
     payload
   );
@@ -15,7 +15,7 @@ export const signin = async (
 export const signup = async (
   payload: SignupRequest
 ): Promise<SignupResponse> => {
-  const response = await axios.post<SignupResponse>(
+  const response = await axiosInstance.post<SignupResponse>(
     "/api/v1/auth/signup",
     payload
   );
@@ -24,7 +24,9 @@ export const signup = async (
 
 // 내 닉네임 조회
 export const getMyProfile = async (): Promise<GetMyProfileResponse> => {
-  const response = await axios.get<GetMyProfileResponse>("/api/v1/users/me");
+  const response = await axiosInstance.get<GetMyProfileResponse>(
+    "/api/v1/users/me"
+  );
   return response.data;
 };
 
@@ -32,9 +34,12 @@ export const getMyProfile = async (): Promise<GetMyProfileResponse> => {
 export const searchNickname = async (
   keyword: string
 ): Promise<SearchNicknameResponse> => {
-  const response = await axios.get<SearchNicknameResponse>(`/api/v1/users`, {
-    params: { keyword },
-  });
+  const response = await axiosInstance.get<SearchNicknameResponse>(
+    `/api/v1/users`,
+    {
+      params: { keyword },
+    }
+  );
   return response.data;
 };
 
@@ -42,7 +47,7 @@ export const searchNickname = async (
 export const updateNickname = async (
   payload: UpdateNicknameRequest
 ): Promise<UpdateNicknameResponse> => {
-  const response = await axios.patch<UpdateNicknameResponse>(
+  const response = await axiosInstance.patch<UpdateNicknameResponse>(
     "/api/v1/users",
     payload
   );
