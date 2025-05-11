@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signup } from "../api/api";
 
 function Signup() {
   const navigate = useNavigate();
@@ -44,13 +45,27 @@ function Signup() {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      console.log("회원가입 정보:", form);
-      alert("회원가입 완료!");
-      navigate("/login");
+      try {
+        const res = await signup({
+          loginId: form.id,
+          password: form.password,
+          nickname: form.nickname,
+        });
+
+        if (res.success) {
+          alert("회원가입이 완료되었습니다!");
+          navigate("/login");
+        } else {
+          alert(res.message || "회원가입에 실패했습니다.");
+        }
+      } catch (err) {
+        console.error("회원가입 요청 중 오류:", err);
+        alert("회원가입 중 오류가 발생했습니다.");
+      }
     }
   };
 
