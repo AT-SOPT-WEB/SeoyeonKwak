@@ -54,9 +54,17 @@ export const searchNickname = async (
 export const updateNickname = async (
   payload: UpdateNicknameRequest
 ): Promise<UpdateNicknameResponse> => {
+  const userId = localStorage.getItem("userId");
+
   const response = await axiosInstance.patch<UpdateNicknameResponse>(
     "/api/v1/users",
-    payload
+    payload,
+    {
+      headers: {
+        userId: userId || "",
+      },
+    }
   );
+
   return response.data;
 };
