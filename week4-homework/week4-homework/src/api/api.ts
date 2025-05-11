@@ -24,9 +24,16 @@ export const signup = async (
 
 // 내 닉네임 조회
 export const getMyProfile = async (): Promise<GetMyProfileResponse> => {
+  const userId = localStorage.getItem("userId");
   const response = await axiosInstance.get<GetMyProfileResponse>(
-    "/api/v1/users/me"
+    "/api/v1/users/me",
+    {
+      headers: {
+        userId: userId || "",
+      },
+    }
   );
+
   return response.data;
 };
 
