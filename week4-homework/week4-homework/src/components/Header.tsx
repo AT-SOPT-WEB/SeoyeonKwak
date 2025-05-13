@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header className="bg-white border-b border-gray-200 px-4 py-3 shadow-md flex items-center justify-between">
-      <h1 className="text-xl font-bold text-blue-600">MyApp</h1>
+      <h1 className="text-xl font-bold text-blue-600">SOPT 4주차 과제</h1>
 
       <nav className="hidden md:flex gap-6 items-center">
         <button onClick={() => goTo("/mypage")} className="hover:underline">

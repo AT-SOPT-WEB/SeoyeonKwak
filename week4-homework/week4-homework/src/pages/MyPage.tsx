@@ -32,8 +32,8 @@ function MyPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">마이 페이지</h1>
+      <div className="w-full max-w-md p-6 bg-white rounded-lg">
+        <h1 className="text-2xl font-bold mb-6 text-center">닉네임 변경</h1>
 
         <label className="text-sm text-gray-600 mb-1">새 닉네임</label>
         <input
@@ -41,7 +41,7 @@ function MyPage() {
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="변경할 닉네임을 입력하세요"
-          className="w-full px-4 py-2 mb-4 border rounded-md"
+          className="w-full px-4 py-2 mb-4 border border-gray-200 rounded-md"
         />
 
         <button

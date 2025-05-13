@@ -26,25 +26,23 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg ">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="w-full max-w-md bg-white p-6 rounded-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">로그인</h1>
-
         <input
           type="text"
           placeholder="아이디"
           value={loginId}
           onChange={(e) => setLoginId(e.target.value)}
-          className="w-full px-4 py-2 mb-4 border rounded-md"
+          className="w-full px-4 py-2 mb-4 border border-gray-200 rounded-md"
         />
         <input
           type="password"
           placeholder="비밀번호"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-4 py-2 mb-4 border rounded-md"
+          className="w-full px-4 py-2 mb-4 border border-gray-200 rounded-md"
         />
-
         {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
 
         <button

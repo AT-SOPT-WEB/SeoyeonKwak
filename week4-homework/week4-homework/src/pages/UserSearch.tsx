@@ -23,8 +23,8 @@ function UserSearch() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-start py-10 px-4">
-      <div className="w-full max-w-md bg-white p-6 rounded shadow">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="w-full max-w-md bg-white p-6 rounded-lg">
         <h1 className="text-2xl font-bold text-center mb-4">회원 검색</h1>
 
         <input
@@ -32,7 +32,7 @@ function UserSearch() {
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="닉네임 입력 (비워두면 전체 조회)"
-          className="w-full px-4 py-2 border rounded mb-3"
+          className="w-full px-4 py-2 border border-gray-200 rounded mb-3"
         />
 
         <button

@@ -80,20 +80,20 @@ function Signup() {
     (step === 3 && !form.nickname);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg ">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="w-full max-w-md bg-white p-6 rounded-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">회원가입</h1>
 
         {step === 1 && (
           <>
-            <label className="text-sm text-gray-600 mb-1">아이디</label>
+            <label className="text-sm text-gray-600 mb-2">아이디</label>
             <input
               type="text"
               name="id"
               placeholder="아이디"
               value={form.id}
               onChange={handleChange}
-              className="w-full px-4 py-2 mb-1 border rounded-md"
+              className="w-full px-4 py-2 mb-4 border border-gray-200 rounded-md"
             />
             {idError && <p className="text-red-500 text-sm mb-3">{idError}</p>}
           </>
@@ -101,14 +101,14 @@ function Signup() {
 
         {step === 2 && (
           <>
-            <label className="text-sm text-gray-600 mb-1">비밀번호</label>
+            <label className="text-sm text-gray-600 mb-2">비밀번호</label>
             <input
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="비밀번호"
               value={form.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 mb-2 border rounded-md"
+              className="w-full px-4 py-2 mb-2 border border-gray-200 rounded-md"
             />
             <input
               type={showPassword ? "text" : "password"}
@@ -116,7 +116,7 @@ function Signup() {
               placeholder="비밀번호 확인"
               value={form.confirmPassword}
               onChange={handleChange}
-              className="w-full px-4 py-2 mb-2 border rounded-md"
+              className="w-full px-4 py-2 mb-2 border border-gray-200 rounded-md"
             />
             <button
               type="button"
@@ -131,7 +131,7 @@ function Signup() {
 
         {step === 3 && (
           <>
-            <label className="text-sm text-gray-600 mb-1">닉네임</label>
+            <label className="text-sm text-gray-600 mb-2">닉네임</label>
 
             <input
               type="text"
