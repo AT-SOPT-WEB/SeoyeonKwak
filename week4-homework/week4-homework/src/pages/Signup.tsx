@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../api/api";
+import IdInput from "../components/signup/IdInput";
+import PasswordInput from "../components/signup/PasswordInput";
+import NicknameInput from "../components/signup/NicknameInput";
 
 function Signup() {
   const navigate = useNavigate();
@@ -11,43 +14,37 @@ function Signup() {
     confirmPassword: "",
     nickname: "",
   });
+
   const [idError, setIdError] = useState("");
   const [pwError, setPwError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm((prev) => ({ ...prev, [name]: value }));
 
     if (step === 1 && name === "id") {
-      if (!value) {
-        setIdError("");
-      } else if (value.length > 20) {
+      if (!value) setIdError("");
+      else if (value.length > 20)
         setIdError("아이디는 20자 이하로 입력해주세요.");
-      } else {
-        setIdError("");
-      }
+      else setIdError("");
     }
 
     if (step === 2 && (name === "password" || name === "confirmPassword")) {
       const pw = name === "password" ? value : form.password;
       const confirm = name === "confirmPassword" ? value : form.confirmPassword;
 
-      if (!pw || !confirm) {
-        setPwError("");
-      } else if (pw.length > 20 || confirm.length > 20) {
+      if (!pw || !confirm) setPwError("");
+      else if (pw.length > 20 || confirm.length > 20)
         setPwError("비밀번호는 20자 이하로 입력해주세요.");
-      } else if (pw !== confirm) {
-        setPwError("비밀번호가 일치하지 않습니다.");
-      } else {
-        setPwError("");
-      }
+      else if (pw !== confirm) setPwError("비밀번호가 일치하지 않습니다.");
+      else setPwError("");
     }
   };
 
   const handleNext = async () => {
     if (step < 3) {
-      setStep(step + 1);
+      setStep((prev) => prev + 1);
     } else {
       try {
         const res = await signup({
@@ -85,63 +82,20 @@ function Signup() {
         <h1 className="text-2xl font-bold mb-6 text-center">회원가입</h1>
 
         {step === 1 && (
-          <>
-            <label className="text-sm text-gray-600 mb-2">아이디</label>
-            <input
-              type="text"
-              name="id"
-              placeholder="아이디"
-              value={form.id}
-              onChange={handleChange}
-              className="w-full px-4 py-2 mb-4 border border-gray-200 rounded-md"
-            />
-            {idError && <p className="text-red-500 text-sm mb-3">{idError}</p>}
-          </>
+          <IdInput value={form.id} onChange={handleChange} error={idError} />
         )}
-
         {step === 2 && (
-          <>
-            <label className="text-sm text-gray-600 mb-2">비밀번호</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="비밀번호"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 mb-2 border border-gray-200 rounded-md"
-            />
-            <input
-              type={showPassword ? "text" : "password"}
-              name="confirmPassword"
-              placeholder="비밀번호 확인"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              className="w-full px-4 py-2 mb-2 border border-gray-200 rounded-md"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="text-sm text-blue-500 mb-2"
-            >
-              {showPassword ? "비밀번호 숨기기" : "비밀번호 보이기"}
-            </button>
-            {pwError && <p className="text-red-500 text-sm mb-3">{pwError}</p>}
-          </>
+          <PasswordInput
+            password={form.password}
+            confirmPassword={form.confirmPassword}
+            onChange={handleChange}
+            show={showPassword}
+            toggleShow={() => setShowPassword((prev) => !prev)}
+            error={pwError}
+          />
         )}
-
         {step === 3 && (
-          <>
-            <label className="text-sm text-gray-600 mb-2">닉네임</label>
-
-            <input
-              type="text"
-              name="nickname"
-              placeholder="닉네임"
-              value={form.nickname}
-              onChange={handleChange}
-              className="w-full px-4 py-2 mb-4 border rounded-md"
-            />
-          </>
+          <NicknameInput value={form.nickname} onChange={handleChange} />
         )}
 
         <button

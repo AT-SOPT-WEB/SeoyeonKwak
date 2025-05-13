@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getMyProfile } from "../api/api";
+import { getMyProfile } from "../../api/api";
 
 export default function Header() {
   const navigate = useNavigate();
