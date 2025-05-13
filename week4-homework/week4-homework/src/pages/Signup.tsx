@@ -5,9 +5,16 @@ import IdInput from "../components/signup/IdInput";
 import PasswordInput from "../components/signup/PasswordInput";
 import NicknameInput from "../components/signup/NicknameInput";
 
+// STEP 상수 정의
+const STEP = {
+  ID: 1,
+  PASSWORD: 2,
+  NICKNAME: 3,
+} as const;
+
 function Signup() {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState<number>(STEP.ID);
   const [form, setForm] = useState({
     id: "",
     password: "",
@@ -23,14 +30,17 @@ function Signup() {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
 
-    if (step === 1 && name === "id") {
+    if (step === STEP.ID && name === "id") {
       if (!value) setIdError("");
       else if (value.length > 20)
         setIdError("아이디는 20자 이하로 입력해주세요.");
       else setIdError("");
     }
 
-    if (step === 2 && (name === "password" || name === "confirmPassword")) {
+    if (
+      step === STEP.PASSWORD &&
+      (name === "password" || name === "confirmPassword")
+    ) {
       const pw = name === "password" ? value : form.password;
       const confirm = name === "confirmPassword" ? value : form.confirmPassword;
 
@@ -43,7 +53,7 @@ function Signup() {
   };
 
   const handleNext = async () => {
-    if (step < 3) {
+    if (step < STEP.NICKNAME) {
       setStep((prev) => prev + 1);
     } else {
       try {
@@ -67,24 +77,24 @@ function Signup() {
   };
 
   const isNextDisabled =
-    (step === 1 && (!form.id || idError)) ||
-    (step === 2 &&
+    (step === STEP.ID && (!form.id || idError)) ||
+    (step === STEP.PASSWORD &&
       (!form.password ||
         !form.confirmPassword ||
         form.password.length > 20 ||
         form.confirmPassword.length > 20 ||
         pwError)) ||
-    (step === 3 && !form.nickname);
+    (step === STEP.NICKNAME && !form.nickname);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="w-full max-w-md bg-white p-6 rounded-lg">
         <h1 className="text-2xl font-bold mb-6 text-center">회원가입</h1>
 
-        {step === 1 && (
+        {step === STEP.ID && (
           <IdInput value={form.id} onChange={handleChange} error={idError} />
         )}
-        {step === 2 && (
+        {step === STEP.PASSWORD && (
           <PasswordInput
             password={form.password}
             confirmPassword={form.confirmPassword}
@@ -94,7 +104,7 @@ function Signup() {
             error={pwError}
           />
         )}
-        {step === 3 && (
+        {step === STEP.NICKNAME && (
           <NicknameInput value={form.nickname} onChange={handleChange} />
         )}
 
@@ -103,7 +113,7 @@ function Signup() {
           onClick={handleNext}
           disabled={isNextDisabled}
         >
-          {step < 3 ? "다음" : "회원가입"}
+          {step < STEP.NICKNAME ? "다음" : "회원가입"}
         </button>
 
         <button
