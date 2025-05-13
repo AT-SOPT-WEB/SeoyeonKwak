@@ -1,0 +1,41 @@
+/** @jsxImportSource @emotion/react */
+import { useState } from "react";
+import { css } from "@emotion/react";
+import Header from "./components/common/Header";
+import GithubSearchContainer from "./components/github/GithubSearchContainer";
+import BaseballContainer from "./components/baseball/BaseballContainer";
+
+const rootWrapper = css`
+  width: 100vw;
+`;
+const contentWrapper = css`
+  max-width: 600px;
+  margin: 40px auto 0;
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: "Noto Sans KR", sans-serif;
+`;
+
+function App() {
+  const [activeTab, setActiveTab] = useState("github");
+
+  return (
+    <div css={rootWrapper}>
+      <Header activeTab={activeTab} onTabChange={setActiveTab} />
+      <main css={contentWrapper}>
+        {activeTab === "github" ? (
+          <GithubSearchContainer />
+        ) : (
+          <BaseballContainer />
+        )}
+      </main>
+    </div>
+  );
+}
+
+export default App;
